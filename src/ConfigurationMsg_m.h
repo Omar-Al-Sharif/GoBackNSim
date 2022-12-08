@@ -31,6 +31,7 @@
  *     //    abstract int anotherField;
  *     int startingNode;
  *     double startingTime;
+ * 
  * }
  * </pre>
  */

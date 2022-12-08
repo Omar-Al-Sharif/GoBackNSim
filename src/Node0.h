@@ -17,8 +17,12 @@
 #define __GOBACKNSIM_NODE0_H_
 
 #include <omnetpp.h>
+#include <vector>
+#include <bitset>
+#include "TransmittedMsg_m.h"
 
 using namespace omnetpp;
+using namespace std;
 
 /**
  * TODO - Generated class
@@ -28,6 +32,14 @@ class Node0 : public cSimpleModule
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+
+  public:
+    void modificationError(vector<bitset<8>>& data);
+    void lossError(double& totalTime);
+    void duplicationError(double& totalTime);
+    void delayError(double& totalTime);
+    void sendWithError();
+
 };
 
 #endif

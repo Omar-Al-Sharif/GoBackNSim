@@ -16,11 +16,16 @@
 //
 // TODO generated message class
 //
-packet ConfigurationMsg {
+
+
+packet TransmittedMsg {
 //    @customize(true);  // see the generated C++ header for more info
 //    int someField;
 //    abstract int anotherField;
-	  int startingNode;
-	  double startingTime;
-	  
+	int parity;
+	int seqNumber; 
+	string payload; // the message contents after byte stuffing (in characters)
+	int frameType; //Data=0/ACK=1 /NACK=2
+	int ackNumber;
+	
 }
