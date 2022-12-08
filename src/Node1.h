@@ -33,6 +33,9 @@ class Node1 : public cSimpleModule
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+
+  public:
+    void readFile(string fileName);
 };
 
 #endif

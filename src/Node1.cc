@@ -16,14 +16,24 @@
 #include "Node1.h"
 
 Define_Module(Node1);
-vector<string> sendWindow;
-vector<string> sendWindowError;
+static vector<string> sendWindow;
+static vector<string> sendWindowError;
 
 void Node1::initialize()
 {
+    readFile("input1.txt");
+}
+
+void Node1::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
+}
+
+void Node1::readFile(string fileName)
+{
     ifstream fin;
         string line, errorBits, message;
-        fin.open("input1.txt"); //open the file
+        fin.open(fileName); //open the file
 
         if (fin.is_open()) //just a safety causal safety check, Not necessary
         {
@@ -44,10 +54,4 @@ void Node1::initialize()
         }
 
         fin.close(); //close the file
-
-}
-
-void Node1::handleMessage(cMessage *msg)
-{
-    // TODO - Generated method body
 }
