@@ -17,7 +17,12 @@
 #define __GOBACKNSIM_NODE1_H_
 
 #include <omnetpp.h>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
 
+using namespace std;
 using namespace omnetpp;
 
 /**
