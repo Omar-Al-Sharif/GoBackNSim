@@ -17,10 +17,18 @@
 #define __GOBACKNSIM_NODE0_H_
 
 #include <omnetpp.h>
+
 #include <vector>
 #include <bitset>
 #include "TransmittedMsg_m.h"
 
+#include <iostream>
+#include <string>
+#include <fstream>
+
+
+
+using namespace std;
 using namespace omnetpp;
 using namespace std;
 
@@ -34,11 +42,27 @@ class Node0 : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
 
   public:
+
     void modificationError(vector<bitset<8>>& data);
     void lossError(double& totalTime);
     void duplicationError(double& totalTime);
     void delayError(double& totalTime);
     void sendWithError();
+
+    void readFile(string fileName);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 };
 

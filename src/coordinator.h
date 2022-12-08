@@ -17,7 +17,10 @@
 #define __GOBACKNSIM_COORDINATOR_H_
 
 #include <omnetpp.h>
+#include <fstream>
+#include <string>
 
+using namespace std;
 using namespace omnetpp;
 
 /**

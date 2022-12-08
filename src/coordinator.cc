@@ -19,7 +19,26 @@ Define_Module(Coordinator);
 
 void Coordinator::initialize()
 {
-    // TODO - Generated method body
+
+    //first READ from the file coordinator.txt
+    //we are going to read two things which are node to start and time to iniate the communication
+
+    string nodeId, startTime;
+    ifstream fin;
+    fin.open("coordinator.txt");
+    fin >> nodeId >> startTime; //since the file will contain only 2 strings
+    fin.close();
+
+    if(nodeId == (string)"0")
+    {
+
+    }
+    else if (nodeId == (string)"0")
+    {
+
+    }
+
+
 }
 
 void Coordinator::handleMessage(cMessage *msg)

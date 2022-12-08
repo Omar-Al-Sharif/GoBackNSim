@@ -16,13 +16,42 @@
 #include "Node1.h"
 
 Define_Module(Node1);
+static vector<string> sendWindow;
+static vector<string> sendWindowError;
 
 void Node1::initialize()
 {
-    // TODO - Generated method body
+    readFile("input1.txt");
 }
 
 void Node1::handleMessage(cMessage *msg)
 {
     // TODO - Generated method body
+}
+
+void Node1::readFile(string fileName)
+{
+    ifstream fin;
+        string line, errorBits, message;
+        fin.open(fileName); //open the file
+
+        if (fin.is_open()) //just a safety causal safety check, Not necessary
+        {
+            while (fin) {
+                //read each line of the file.
+                getline(fin, line);
+
+                //This part is to divide the line into 2 parts, one for error bits and one the rest of the message.
+                errorBits = line.substr(0, 4);
+                message = line.substr(5, line.size() - 5);
+
+                cout << line << endl << errorBits << endl << message << endl << endl;
+
+                //push errorBits and message in their vectors
+                sendWindow.push_back(message);
+                sendWindowError.push_back(errorBits);
+            }
+        }
+
+        fin.close(); //close the file
 }
