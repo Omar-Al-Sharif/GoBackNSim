@@ -1,18 +1,3 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 #include "Node0.h"
 
 Define_Module(Node0);
@@ -26,15 +11,7 @@ static vector<string> sendWindowError;
 //Output string -> the previous vector<bitsets> transformed into string
 
 
-//void sendWithError(vector<bitset<8>>& data)
-//{
-//
-//
-//
-//
-//}
-
-void Node0::modificationError(vector<bitset<8>>& data)
+void Node0::modificationError()
 {
     int modifiedBit=int(uniform(0,data.size()*8));
     int modifiedChar= modifiedBit / data.size();
@@ -43,48 +20,88 @@ void Node0::modificationError(vector<bitset<8>>& data)
 }
 
 
-void Node0::delayError(double& totalTime)
+void Node0::delayError()
 {
     totalTime+=getParentModule()->par("ED").intValue();
     //Not neccessarily int
 }
 
 
-//void Node0::duplicationError(TransmittedMsg* msg)
-//{
-//    schdeuleAt(simTime()+getParentModule()->par("DD").intValue(),msg);
-//}
-
-
-//void sendWithError(double& totalTime, TransmittedMsg* msg)
-//{
-////    TransmittedMsg* msg= new TransmittedMsg("");
-//    schdeuleAt(simTime()+totalTime, msg);
-//
-//}
-
-
-
-
-
-
-void Node0::initialize() {
-    // TODO - Generated method body
-
-        // If message kind=0 -> configuration msg (from coordinator)
-        // cast msg to configuration msg and implement the behaviour accordingly
-        // If message kind =1 -> transmitted msg (between nodes)
-        // Implement GobackN algorithm
-
-        //Input vector of strings (the buffer)
-        //Loop on size V[i]-> string -----> transform vector<bitset<8>>
-        //Transform to string before sending
-
-    // TODO - Generated method body
-    readFile("input0.txt");
+void Node0::duplicationError()
+{
+    sendWithError(totalTime);
+    double DD=getParentModule()->par("DD").doubleValue();
+    sendWithError(totalTime+DD);
 }
 
 
+
+void Node0::sendWithError(double totalTime)
+{
+//  TransmittedMsg* msg= new TransmittedMsg("");
+    //schdeuleAt(simTime()+totalTime, msg);
+    sendDelayed(transmittedMsg,totalTime,"node0_out", 1);
+}
+
+
+void Node0::applyErrors()
+{
+    if (errorFlags[1]=='1') //Loss error will dominate
+    {
+        return;
+    }
+    else
+    {
+        if(errorFlags[0]=='1') //Modification error
+        {
+            modificationError();
+        }
+    
+        if(errorFlags[3]=='1') //Delay error
+        {
+            delayError();
+        }
+
+        if(errorFlags[2]=='1') //Duplication error
+        {
+             duplicationError();
+             return; 
+        }
+
+        sendWithError(totalTime);
+    }
+
+}
+
+
+void Node0::setMsgData()
+{
+    transmittedMsg->setKind(1);
+}
+
+void Node0::initializeParameters()
+{
+
+}
+
+
+void Node0::initialize()
+{
+    // TODO - Generated method body
+    readFile("input0.txt");
+    initializeParameters();
+    // If message kind=0 -> configuration msg (from coordinator)
+    // cast msg to configuration msg and implement the behaviour accordingly
+    // If message kind =1 -> transmitted msg (between nodes)
+    // Implement GobackN algorithm
+
+    // Input vector of strings (the buffer)
+    // Loop on size V[i]-> string -----> transform vector<bitset<8>>
+    // Transform to string before sending
+
+    
+   applyErrors();
+}
 
 void Node0::handleMessage(cMessage *msg) {
 

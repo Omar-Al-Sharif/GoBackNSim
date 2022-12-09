@@ -1,26 +1,17 @@
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
 #ifndef __GOBACKNSIM_NODE1_H_
 #define __GOBACKNSIM_NODE1_H_
 
 #include <omnetpp.h>
+
+#include <vector>
+#include <bitset>
+#include "TransmittedMsg_m.h"
+
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <vector>
+
+
 
 using namespace std;
 using namespace omnetpp;
@@ -35,7 +26,26 @@ class Node1 : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
 
   public:
+
+    void modificationError();
+    void lossError();
+    void duplicationError();
+    void delayError();
+    void sendWithError(double totalTime);
+    void applyErrors();
+    void initializeParameters();
+    void setMsgData();
+
     void readFile(string fileName);
+
+  private:
+    vector<bitset<8>> data;
+    TransmittedMsg* transmittedMsg;
+    double totalTime;
+    string errorFlags;
+
+
+
 };
 
 #endif
