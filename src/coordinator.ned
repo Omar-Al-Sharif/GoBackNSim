@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package gobacknsim;
+package gobackn;
 
 //
 // TODO auto-generated module
@@ -21,6 +21,5 @@ package gobacknsim;
 simple Coordinator
 {
     gates:
-    	input inport[];
     	output outport[];
 }

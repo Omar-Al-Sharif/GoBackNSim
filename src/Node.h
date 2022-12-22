@@ -4,6 +4,7 @@
 #include <omnetpp.h>
 
 #include <vector>
+#include <queue>
 #include <bitset>
 #include "TransmittedMsg_m.h"
 #include "ConfigurationMsg_m.h"
@@ -20,31 +21,40 @@ using namespace omnetpp;
 /**
  * TODO - Generated class
  */
-class Node0 : public cSimpleModule
+class Node : public cSimpleModule
 {
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 
   public:
-
+    //utility functions for errors
     void modificationError();
     void lossError();
     void duplicationError();
     void delayError();
     void sendWithError(double totalTime);
     void applyErrors();
-    void initializeParameters();
-    void setMsgData();
 
+    //Reading from input text files
+    void readFile(string fileName);
+
+    //reset private data members each message
+    void initializeParameters();
+
+    //utility functions for Go back N
+    void setMsgData();
+    void stringToBitset(string string);
     void dataToChar();
     void charToData();
     void framing();
     void deframing();
-    void parityByteCalc();
+
+    int parityByteCalc(vector<bitset<8> > dataToCheck);
     int messageType(cMessage *msg);
     int circularInc(int frameExpected);
-    void readFile(string fileName);
+
+    bool isBetween(int number);
 
   private:
     vector<bitset<8> > data;

@@ -13,14 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package gobacknsim;
+package gobackn;
 
 //
 // TODO auto-generated module
 //
-simple Node1
+simple Node
 {
-     gates:
-        input node1_in[];
-        output node1_out[];
+    gates:
+        input node_in[];
+        output node_out[];
 }

@@ -28,14 +28,14 @@ void Coordinator::initialize()
     fin.open("coordinator.txt");
     fin >> nodeId >> startTime; //since the file will contain only 2 strings
     fin.close();
-
+    //create new message
     if(nodeId == (string)"0")
     {
-
+        //use scheduleAt or sendDelayed to send message to the intended not at the intended time
     }
-    else if (nodeId == (string)"0")
+    else if (nodeId == (string)"1")
     {
-
+        //use scheduleAt or sendDelayed to send message to the intended not at the intended time
     }
 
 

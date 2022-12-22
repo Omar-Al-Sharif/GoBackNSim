@@ -1,3 +1,3 @@
-package gobacknsim.simulations;
+package gobackn.simulations;
 
 @license(LGPL);
