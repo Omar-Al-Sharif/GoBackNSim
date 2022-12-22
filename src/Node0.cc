@@ -124,7 +124,7 @@ void Node0::framing(){
     charData = temp;
     //inserting flag at the beginning and the end of the message
     charData.insert(charData.begin(), '$');
-    charData.insert(charData.end() - 1, '$');
+    charData.insert(charData.end(), '$');
     charToData();
     string payload(charData.begin(), charData.end());
     transmittedMsg->setPayload(payload.c_str());
@@ -133,7 +133,9 @@ void Node0::framing(){
 
 void Node0::deframing()
 {
-    //charData=string(transmittedMsg->getPayload());
+    charData.clear();
+    string payload=transmittedMsg->getPayload();
+    for (int i=0; i<payload.length(); i++) charData.push_back(payload[i]);
     charData.erase(charData.begin()+charData.size()-1);
     charData.erase(charData.begin());
     vector<char> temp;
