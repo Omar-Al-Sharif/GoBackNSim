@@ -39,7 +39,7 @@ class Node1 : public cSimpleModule
     void readFile(string fileName);
 
   private:
-    vector<bitset<8>> data;
+    vector<bitset<8> > data;
     TransmittedMsg* transmittedMsg;
     double totalTime;
     string errorFlags;

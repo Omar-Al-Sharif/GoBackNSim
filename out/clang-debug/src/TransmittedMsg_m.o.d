@@ -1,6 +1,7 @@
-../out/clang-debug/src/coordinator.o: coordinator.cc coordinator.h \
+../out/clang-debug/src/TransmittedMsg_m.o: TransmittedMsg_m.cc \
+  TransmittedMsg_m.h \
   C:/omnetpp-5.6.2-src-windows/omnetpp-5.6.2/include\omnetpp.h
 
-coordinator.h:
+TransmittedMsg_m.h:
 
 C:/omnetpp-5.6.2-src-windows/omnetpp-5.6.2/include\omnetpp.h:

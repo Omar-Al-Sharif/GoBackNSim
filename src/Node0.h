@@ -6,6 +6,7 @@
 #include <vector>
 #include <bitset>
 #include "TransmittedMsg_m.h"
+#include "ConfigurationMsg_m.h"
 
 #include <iostream>
 #include <string>
@@ -36,23 +37,22 @@ class Node0 : public cSimpleModule
     void initializeParameters();
     void setMsgData();
 
+    void dataToChar();
+    void charToData();
+    void framing();
+    void deframing();
+    void parityByteCalc();
+    int messageType(cMessage *msg);
+    int circularInc(int frameExpected);
     void readFile(string fileName);
 
   private:
-    vector<bitset<8>> data;
+    vector<bitset<8> > data;
+    vector<char> charData;
+
     TransmittedMsg* transmittedMsg;
     double totalTime;
     string errorFlags;
-
-
-
-
-
-
-
-
-
-
 
 };
 
